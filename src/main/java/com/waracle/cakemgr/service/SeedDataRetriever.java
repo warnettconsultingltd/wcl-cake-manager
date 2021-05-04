@@ -1,4 +1,4 @@
-package com.waracle.cakemgr.apiserver.utilities;
+package com.waracle.cakemgr.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
