@@ -1,4 +1,4 @@
-package com.waracle.cakemgr.apiserver.persistance;
+package com.waracle.cakemgr.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

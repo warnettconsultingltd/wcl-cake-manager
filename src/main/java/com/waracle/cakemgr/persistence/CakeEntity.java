@@ -1,4 +1,4 @@
-package com.waracle.cakemgr.apiserver.persistance;
+package com.waracle.cakemgr.persistence;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,7 +19,7 @@ public class CakeEntity {
     @Column(name="imageurl")
     private String imageUrl;
 
-    public void setd(UUID id) { this.id = id; }
+    public void setId(UUID id) { this.id = id; }
     public UUID getId() { return id; }
 
     public void setTitle(String title) { this.title = title; }
