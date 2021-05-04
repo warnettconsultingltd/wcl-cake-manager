@@ -14,8 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource("classpath:application-apiserver.properties")
-@ActiveProfiles("apiserver")
+@TestPropertySource("classpath:application.properties")
 public class SeedDataServiceTest {
     @Autowired
     private CakeRepository cakeRepository;
@@ -24,7 +23,7 @@ public class SeedDataServiceTest {
     public void checkSeedDataServicePopulatesDataCorrectly() {
         var populatedCakes = cakeRepository.findAll();
 
-        Assertions.assertEquals(5, populatedCakes.size());
+        assertEquals(5, populatedCakes.size());
 
         checkPopulatedCakeHasCorrectData(populatedCakes.get(0),
                 "Lemon cheesecake",
@@ -53,9 +52,9 @@ public class SeedDataServiceTest {
     }
 
     private void checkPopulatedCakeHasCorrectData(CakeEntity cake, String title, String description, String imageUrl) {
-        Assertions.assertNotNull(cake.getId());
-        Assertions.assertEquals(title, cake.getTitle());
-        Assertions.assertEquals(description, cake.getDescription());
-        Assertions.assertEquals(imageUrl, cake.getImageUrl());
+        assertNotNull(cake.getId());
+        assertEquals(title, cake.getTitle());
+        assertEquals(description, cake.getDescription());
+        assertEquals(imageUrl, cake.getImageUrl());
     }
 }
