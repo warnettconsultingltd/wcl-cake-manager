@@ -1,6 +1,8 @@
-package com.waracle.cakemgr.uiclient.service;
+package com.waracle.cakemgr.service;
 
 import com.waracle.cakemgr.entities.Cake;
+import com.waracle.cakemgr.service.CakeDataService;
+import com.waracle.cakemgr.service.CakeRetriever;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,16 +23,16 @@ public class CakeDataServiceTest {
 
     @BeforeEach
     public void setupDataService() {
-        lenient().when(mockCakeRetriever.getAllCakes()).thenReturn(expectedCakes());
+        Mockito.lenient().when(mockCakeRetriever.getAllCakes()).thenReturn(expectedCakes());
 
         dataService = new CakeDataService(mockCakeRetriever);
     }
 
     @Test
     public void checkThatListOfCakesCorrectlyReturned() {
-        lenient().when(mockCakeRetriever.getAllCakesAsJson()).thenReturn(expectedJson());
+        Mockito.lenient().when(mockCakeRetriever.getAllCakesAsJson()).thenReturn(expectedJson());
 
-        assertEquals(expectedCakes(), dataService.getAllCakes());
+        Assertions.assertEquals(expectedCakes(), dataService.getAllCakes());
     }
 
     private List<Cake> expectedCakes() {

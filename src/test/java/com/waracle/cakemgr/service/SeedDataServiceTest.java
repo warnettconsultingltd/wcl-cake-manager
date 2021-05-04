@@ -1,7 +1,7 @@
-package com.waracle.cakemgr.apiserver.service;
+package com.waracle.cakemgr.service;
 
-import com.waracle.cakemgr.apiserver.persistance.CakeEntity;
-import com.waracle.cakemgr.apiserver.persistance.CakeRepository;
+import com.waracle.cakemgr.persistence.CakeEntity;
+import com.waracle.cakemgr.persistence.CakeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class SeedDataServiceTest {
     public void checkSeedDataServicePopulatesDataCorrectly() {
         var populatedCakes = cakeRepository.findAll();
 
-        assertEquals(5, populatedCakes.size());
+        Assertions.assertEquals(5, populatedCakes.size());
 
         checkPopulatedCakeHasCorrectData(populatedCakes.get(0),
                 "Lemon cheesecake",
@@ -53,9 +53,9 @@ public class SeedDataServiceTest {
     }
 
     private void checkPopulatedCakeHasCorrectData(CakeEntity cake, String title, String description, String imageUrl) {
-        assertNotNull(cake.getId());
-        assertEquals(title, cake.getTitle());
-        assertEquals(description, cake.getDescription());
-        assertEquals(imageUrl, cake.getImageUrl());
+        Assertions.assertNotNull(cake.getId());
+        Assertions.assertEquals(title, cake.getTitle());
+        Assertions.assertEquals(description, cake.getDescription());
+        Assertions.assertEquals(imageUrl, cake.getImageUrl());
     }
 }
