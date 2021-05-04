@@ -144,3 +144,15 @@ retrieved and populated into the database.
 
 As a workaround, a Collection of Postman tests has been created and are placed within the
 src/main/resources directory.
+
+### RESOLUTION
+
+At this stage, given the numerous issues surrounding the split between the client and server, especially surrounding
+testing, I've decided to put merge the two into a single project and remove the delineation.  The project will thus
+become a single Spring Boot application providing the Thymeleaf UI over the seed data retriever and persistence layer.
+A step back to go two steps forward...
+
+## TO DO
+
+- Improve validation
+  - Photo links returning non 200 status, ie 404 or 403 as seen with seed data
