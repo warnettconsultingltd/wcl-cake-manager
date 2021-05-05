@@ -1,5 +1,15 @@
 # SOLUTION NOTES
 
+## RUNNING THE APP
+
+ - Generate the jar file by performing mvn clean install; the jar file will be generated in the target directory.
+ - Execute java -jar wcl-cake-manager.jar from the command line to run the Spring Boot Application.
+ - In a browser, use the url http://localhost:8082/ to access the main page displaying a list of Cakes in tabular form.
+ - The URLS available in the application are as follows :-
+    - http://localhost:8082/ - displays list of cakes in tabular format.
+    - http://localhost:8082/cakes - displays list of cakes in Json format.
+    - http://localhost:8082/add - form for adding a new Cake.
+    - 
 ## CI URL
 
 https://app.circleci.com/pipelines/github/warnettconsultingltd/wcl-cake-manager
