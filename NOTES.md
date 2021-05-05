@@ -179,7 +179,11 @@ A single validation occurs, namely checking the Title to avoid duplicate Cakes b
 would need to be determined if that was sufficient validation.
 
 ## TO DO
-
+- Things mentioned in original brief
+  - OAuth2 authentication - not done that before, something else to learn.
+  - Containerisation - should be a fairly simple task to define a Dockerfile copying the jar file.
+    executing the jar file and exposing port 8082.  Would need to be integrated into maven build
+    process, could be pushed to DockerHub.
 - Improve validation
   - Photo links returning non 200 status, ie 404 or 403 as seen with seed data
   - Validate the data entered
@@ -193,3 +197,4 @@ would need to be determined if that was sufficient validation.
     work with MockMvc and Thymeleaf, felt it was best to complete the code.
 - Use Spring profiles for dev/prod/test style segregation of properties; using a separate
   database ( in-mem for dev/test, other for prod ) would remove need to mock integration tests
+- Use CSS stylings on the front end.  It looks like utter crap.  
