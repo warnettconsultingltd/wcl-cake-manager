@@ -47,12 +47,21 @@ public class CakeManagerControllerTest {
     }
 
     @Test
-    public void checkThatMainPageContainsCorrectCakeJsonData() throws Exception {
+    public void checkThatCakesPageContainsCorrectCakeJsonData() throws Exception {
         lenient().when(mockCakeDataService.getAllCakesAsJson()).thenReturn(generateTestDataAsJson());
 
         this.mockMvc.perform(get("/cakes"))
                 .andExpect(view().name("cakes"))
                 .andExpect(model().attribute("cakes_json", generateTestDataAsJson()));
+    }
+
+    @Test
+    public void checkThatAddCakePageContainsCorrectElements() throws Exception {
+        this.mockMvc.perform(get("/add"))
+                .andExpect(view().name("add_cake_form"))
+                .andExpect(content().string(containsString("Welcome to the Cake Manager application!")))
+                .andExpect(content().string(containsString("My UI design skills suck by the way")));
+
     }
 
     private List<Cake> generateTestData() {

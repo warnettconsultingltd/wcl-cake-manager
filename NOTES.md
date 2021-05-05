@@ -152,6 +152,10 @@ testing, I've decided to put merge the two into a single project and remove the 
 become a single Spring Boot application providing the Thymeleaf UI over the seed data retriever and persistence layer.
 A step back to go two steps forward...
 
+## ISSUE 11 - Add Thymeleaf elements to facilitate adding a new Cake
+
+
+
 ## TO DO
 
 - Improve validation
