@@ -75,7 +75,7 @@ public class CakeManagerIntegrationTest {
 
     @Test
     public void checkThatCakesPageContainsCorrectCakeJsonData() throws Exception {
-        this.mockMvc.perform(post("/cakes"))
+        this.mockMvc.perform(get("/cakes"))
                 .andExpect(view().name("cakes"))
                 .andExpect(model().attribute("cakes_json", notNullValue()));
     }
