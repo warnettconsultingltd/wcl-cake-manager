@@ -15,9 +15,10 @@
     <div id="add_cake_form">
         <h1>Add Cake</h1>
 
-        <form action="#" th:action="@{/add}" method="post" th:object="${cake}">
+        <form action="#" th:action="@{/add}" th:object="${cake}" method="post">
             <label>Title:</label>
             <input type="text" th:field="*{title}"/><br/>
+            <span th:if="${titleErrorMessage}" th:text="${titleErrorMessage}"></span>
 
             <label>Description:</label>
             <input type="text" th:field="*{description}"/><br/>

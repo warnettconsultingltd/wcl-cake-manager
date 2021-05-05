@@ -154,9 +154,47 @@ A step back to go two steps forward...
 
 ## ISSUE 11 - Add Thymeleaf elements to facilitate adding a new Cake
 
+Added a new add_cake_form page.  Added link to that page on the two existing pages.
 
+## ISSUE 12 - Persist a new Cake.
+
+The process of adding a new Cake should be :-
+ - Click link to access new Cake form ( link should be on / and /cakes pages)
+ - Enter new Cake details
+ - Press button to add new Cake
+ - HAPPY PATH
+   - Cake persisted
+   - App returns to page to display list of Cakes with new Cake added
+ - OOPS PATH
+   - A Cake already exists for the supplied Title
+   - Error displayed on screen
+   - Cake not persisted to database
+  
+Due to issues experienced with Mockvc and the integration test, it was decided to concentrate
+on getting the code working due to timeboxing issues.  I'd say for the record this is more an 
+issue with front end skills than anything else, the overwhelming majority of work undertaken has#
+been back end.
+
+A single validation occurs, namely checking the Title to avoid duplicate Cakes being entered; it
+would need to be determined if that was sufficient validation.
 
 ## TO DO
-
+- Things mentioned in original brief
+  - OAuth2 authentication - not done that before, something else to learn.
+  - Containerisation - should be a fairly simple task to define a Dockerfile copying the jar file.
+    executing the jar file and exposing port 8082.  Would need to be integrated into maven build
+    process, could be pushed to DockerHub.
 - Improve validation
   - Photo links returning non 200 status, ie 404 or 403 as seen with seed data
+  - Validate the data entered
+    - Check for null values
+    - Check for empty Strings
+    - Check for nasty code trying to have the database ( any hacks imprioving this code are welcome...)
+    - Check the format of the image url entered
+- Fix failing integration tests!  
+  - Adding a new Cake works however in the integration test, commented out, the data isn't
+    being received by the endpoint.  Cogniscent of time, bearing this is the first time I've
+    work with MockMvc and Thymeleaf, felt it was best to complete the code.
+- Use Spring profiles for dev/prod/test style segregation of properties; using a separate
+  database ( in-mem for dev/test, other for prod ) would remove need to mock integration tests
+- Use CSS stylings on the front end.  It looks like utter crap.  

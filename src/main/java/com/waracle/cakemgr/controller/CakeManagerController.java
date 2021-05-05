@@ -6,9 +6,13 @@ import com.waracle.cakemgr.service.CakeDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.net.URI;
 
 @Controller
 public class CakeManagerController {
@@ -42,8 +46,23 @@ public class CakeManagerController {
     }
 
     @PostMapping("/add")
-    public String addNewCake(@ModelAttribute("cake") CakeUIForm cakeForm) {
-        System.out.println(cakeForm);
-        return "index";
+    public String addUser(CakeUIForm newCake, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("cake", newCake);
+            return "add_cake_form";
+        }
+
+        if (!cakeDataService.existsForTitle(newCake.getTitle())) {
+            cakeDataService.insertCake(new Cake(null,
+                    newCake.getTitle(),
+                    newCake.getDescription(),
+                    URI.create(newCake.getImageURL())));
+        } else {
+            model.addAttribute("titleErrorMessage", "A Cake with that Title already exists");
+            model.addAttribute("cake", newCake);
+            return "add_cake_form";
+        }
+
+        return "redirect:/";
     }
 }
