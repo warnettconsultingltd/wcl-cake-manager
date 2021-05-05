@@ -126,3 +126,33 @@ Added a simple service on the uiclient side to retrieve data to populate the Thy
 correctly; for this git push, uses dummy data.
 
 Added tests of the Thymeleaf page with regards to model population.
+
+## ISSUE 10 - CONNECT UI AND SERVER
+
+The UI data service was amended to issue calls to the Server REST API.
+
+### PROBLEM
+
+Tests should be written to ensure that the front end is correctly populated with the Seed Data
+from the server - however, this requires server and client to be running at the same time.
+Trying to think of a way to automate this - more proof that client and server should be in
+separate projects...
+
+This issue is mitigated by the fact that tests exist to check that the client model gets correctly
+populated from the client data service and that the REST API has tests to confirm seed data is
+retrieved and populated into the database.
+
+As a workaround, a Collection of Postman tests has been created and are placed within the
+src/main/resources directory.
+
+### RESOLUTION
+
+At this stage, given the numerous issues surrounding the split between the client and server, especially surrounding
+testing, I've decided to put merge the two into a single project and remove the delineation.  The project will thus
+become a single Spring Boot application providing the Thymeleaf UI over the seed data retriever and persistence layer.
+A step back to go two steps forward...
+
+## TO DO
+
+- Improve validation
+  - Photo links returning non 200 status, ie 404 or 403 as seen with seed data

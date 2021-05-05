@@ -1,7 +1,7 @@
-package com.waracle.cakemgr.apiserver.service;
+package com.waracle.cakemgr.service;
 
-import com.waracle.cakemgr.apiserver.persistance.CakeEntity;
-import com.waracle.cakemgr.apiserver.persistance.CakeRepository;
+import com.waracle.cakemgr.persistence.CakeEntity;
+import com.waracle.cakemgr.persistence.CakeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource("classpath:application-apiserver.properties")
-@ActiveProfiles("apiserver")
+@TestPropertySource("classpath:application.properties")
 public class SeedDataServiceTest {
     @Autowired
     private CakeRepository cakeRepository;

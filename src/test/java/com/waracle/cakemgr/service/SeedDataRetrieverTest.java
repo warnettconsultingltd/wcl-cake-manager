@@ -1,11 +1,10 @@
-package com.waracle.cakemgr.apiserver.utilities;
+package com.waracle.cakemgr.service;
 
 import com.waracle.cakemgr.entities.SeedDataCake;
+import com.waracle.cakemgr.service.SeedDataRetriever;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 

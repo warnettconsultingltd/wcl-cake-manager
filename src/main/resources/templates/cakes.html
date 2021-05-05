@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cake Manager</title>
+</head>
+<body>
+    <div id="cake_page">
+        <div id="info_text">
+            <h1>Welcome to the Cake Manager application!</h1>
+            <p>My UI design skills suck by the way</p>
+        </div>
+
+        <div id="cake_data">
+            <div id="cake_json">
+                <h3>Cakes in JSON Format</h3>
+                <p th:text="${cakes_json}"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

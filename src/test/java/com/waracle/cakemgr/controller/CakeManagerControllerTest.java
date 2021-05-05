@@ -1,67 +1,33 @@
-package com.waracle.cakemgr.uiclient.controller;
+package com.waracle.cakemgr.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.waracle.cakemgr.entities.Cake;
+import com.waracle.cakemgr.service.CakeDataService;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.WebApplicationContext;
 
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.lenient;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@TestPropertySource("classpath:application-uiclient.properties")
-@ActiveProfiles("uiclient")
-public class UiClientControllerTest {
-    private static final String UICLIENT_URI = "http://localhost:8282/";
-
-    RestTemplate restTemplate;
-
+@WebMvcTest(CakeManagerController.class)
+public class CakeManagerControllerTest {
     @Autowired
-    private WebApplicationContext context;
-
     private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .build();
-    }
-
-    @BeforeEach
-    public void setupRestTemplate() {
-        restTemplate = new RestTemplate();
-    }
-
-    @Test
-    public void checkThatUIClientInstantiatesThymeleafMainPage() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andExpect(view().name("index"))
-                .andExpect(status().isOk());
-    }
+    @MockBean
+    private CakeDataService mockCakeDataService;
 
     @Test
     public void checkThatMainPageContainsCorrectHeaderText() throws Exception {
@@ -73,6 +39,8 @@ public class UiClientControllerTest {
 
     @Test
     public void checkThatMainPageContainsCorrectCakeTableData() throws Exception {
+        lenient().when(mockCakeDataService.getAllCakes()).thenReturn(generateTestData());
+
         this.mockMvc.perform(get("/"))
                 .andExpect(view().name("index"))
                 .andExpect(model().attribute("cakes", Matchers.equalTo(generateTestData())));
@@ -80,8 +48,10 @@ public class UiClientControllerTest {
 
     @Test
     public void checkThatMainPageContainsCorrectCakeJsonData() throws Exception {
-        this.mockMvc.perform(get("/"))
-                .andExpect(view().name("index"))
+        lenient().when(mockCakeDataService.getAllCakesAsJson()).thenReturn(generateTestDataAsJson());
+
+        this.mockMvc.perform(get("/cakes"))
+                .andExpect(view().name("cakes"))
                 .andExpect(model().attribute("cakes_json", generateTestDataAsJson()));
     }
 
@@ -98,11 +68,9 @@ public class UiClientControllerTest {
         try {
             return objectMapper.writeValueAsString(generateTestData());
         } catch (JsonProcessingException e) {
-            System.out.println("ERRROR > " + e.getMessage());
             e.printStackTrace();
         }
 
         return null;
     }
-
 }
